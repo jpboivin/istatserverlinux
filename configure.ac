@@ -386,13 +386,13 @@ AC_CHECK_MEMBER([struct statvfs.f_frsize],[AC_DEFINE_UNQUOTED([HAVE_STATVFS_FRSI
 
 AC_MSG_CHECKING([for default location of config directory])
 test x"$prefix" = x"NONE" && prefix="$ac_default_prefix"
-configpath=`eval echo "$sysconfdir"/istatserver/`
+configpath=`eval echo /var/packages/istatserver/target/etc/istatserver/`
 AC_MSG_RESULT([$configpath])
 AC_DEFINE_UNQUOTED([CONFIG_PATH],["${configpath}"],[default location of the certificate files])
 
 AC_MSG_CHECKING([for default location of configuration file])
 test x"$prefix" = x"NONE" && prefix="$ac_default_prefix"
-configpath=`eval echo "$sysconfdir"/istatserver/istatserver.conf`
+configpath=`eval echo /var/packages/istatserver/target/etc/istatserver/istatserver.conf`
 AC_MSG_RESULT([$configpath])
 
 AC_MSG_CHECKING([CPU usage probe type])

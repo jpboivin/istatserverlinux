@@ -1,0 +1,35 @@
+#!/bin/sh
+
+case $1 in
+	start)
+		PROCESS_NUM=$(ps -ef | grep "/var/packages/istatserver/target/bin/istatserver" | grep -v "grep" | wc -l)
+		if [ $PROCESS_NUM -eq 0 ]; then
+			/var/packages/istatserver/target/bin/istatserver -d
+			echo "iStatServer started!" > $SYNOPKG_TEMP_LOGFILE
+			exit 0
+		else
+			echo "iStatServer already running!" > $SYNOPKG_TEMP_LOGFILE
+			exit 1
+		fi
+	;;
+	stop)
+		killall -q -TERM /var/packages/istatserver/target/bin/istatserver
+		echo "iStatServer stopped!" > $SYNOPKG_TEMP_LOGFILE
+		exit 0
+	;;
+	status)
+		PROCESS_NUM=$(ps -ef | grep "/var/packages/istatserver/target/bin/istatserver" | grep -v "grep" | wc -l)
+		if [ $PROCESS_NUM -eq 1 ]; then
+			exit 0
+		else
+			exit 1
+		fi
+		exit 1
+	;;
+	killall)
+		killall -q -TERM /var/packages/istatserver/target/bin/istatserver
+	;;
+	log)
+		exit 0
+	;;
+esac

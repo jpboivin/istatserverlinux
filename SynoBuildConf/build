@@ -1,0 +1,21 @@
+#!/bin/bash
+
+include /env.mak
+
+PKG_NAME="istatserver"
+INST_DIR="/tmp/_${PKG_NAME}"
+
+#case ${MakeClean} in
+#    [Yy][Ee][Ss])
+#        make distclean
+#        ;;
+#esac
+
+env CC="${CC}" CXX="${CXX}" LD="${LD}" AR=${AR} STRIP=${STRIP} RANLIB=${RANLIB} NM={NM} \
+    CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" \
+    LDFLAGS="${LDFLAGS}" \
+    ./autogen ; \
+    ./configure ${ConfigOpt} \
+    --prefix=${INST_DIR}
+
+make ${MAKE_FLAGS}
